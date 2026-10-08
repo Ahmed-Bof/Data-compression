@@ -156,5 +156,3 @@ def main_menu():
 if __name__ == '__main__':
     main_menu()    
 
-#name = " hassan"
-#print("hello world" + name)
