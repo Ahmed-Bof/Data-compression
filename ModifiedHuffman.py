@@ -4,9 +4,7 @@ import math
 import os
  
  
-# ======================================================================
-# File pickers
-# ======================================================================
+
 def choose_open_file(title):
     """Open a file picker; fall back to typing the path if tkinter isn't available."""
     try:
@@ -37,9 +35,7 @@ def choose_save_file(title, extension):
         return input(f"{title} (type path): ").strip().strip('"')
  
  
-# ======================================================================
-# Modified Huffman algorithm
-# ======================================================================
+
 def huffman(probs):
     """probs {symbol: probability} -> {symbol: code}"""
     if len(probs) == 1:
@@ -92,9 +88,7 @@ def make_codes(counts, limit):
     return codes
  
  
-# ======================================================================
-# Compress / decompress (no file access here)
-# ======================================================================
+
 def compress(text, limit):
     """text -> bytes (overhead line + bits packed 8 per byte)"""
     counts = count_symbols(text)
@@ -127,9 +121,7 @@ def decompress(raw):
     return "".join(text)
  
  
-# ======================================================================
-# Files: read text -> compress -> write binary
-# ======================================================================
+
 def compress_file(limit):
     path = choose_open_file("Select a text file to compress")
     if not path or not os.path.isfile(path):
@@ -147,9 +139,7 @@ def compress_file(limit):
     return len(text.encode("utf-8")), len(compressed)
  
  
-# ======================================================================
-# Files: read binary -> decompress -> write text
-# ======================================================================
+
 def decompress_file():
     path = choose_open_file("Select a binary file to decompress")
     if not path or not os.path.isfile(path):
@@ -165,9 +155,7 @@ def decompress_file():
         f.write(text)
  
  
-# ======================================================================
-# Main
-# ======================================================================
+
 def main():
     while True:   
         print("\n===Modified Huffman Coding===")
@@ -178,13 +166,11 @@ def main():
  
         if choice == "1":
             limit = float(input("Minimum probability limit (e.g. 0.05): "))
-      #  src = choose_open_file("Select input text file")
-       # dst = choose_save_file("Save compressed file as", ".bin")
+      
             old, new = compress_file(limit)
             print("Done: %d bytes -> %d bytes" % (old, new))
         elif choice == "2":
-      #  src = choose_open_file("Select compressed file")
-       # dst = choose_save_file("Save decompressed text as", ".txt")
+    
             decompress_file()
             print("Done.")
         elif choice == "3":
